@@ -1,33 +1,17 @@
-function add(a, b) {
-    return a + b;
-}
+const os = require('os');
+// console.log(`OS Platform:   ${os.platform()}`);
+// console.log(`Architecture:  ${os.arch()}`);
+// console.log(`Machine Type:  ${os.machine()}`);
+// console.log(`OS Uptime:     ${(os.uptime() / 3600).toFixed(2)} hours`);
 
-function sub(a, b) {
-    return a - b;
-}
+// console.log('\n--- MEMORY INFO ---');
+// const totalGB = (os.totalmem() / 1024 / 1024 / 1024).toFixed(2);
+// const freeGB = (os.freemem() / 1024 / 1024 / 1024).toFixed(2);
+// console.log(`Total Memory:  ${totalGB} GB`);
+// console.log(`Free Memory:   ${freeGB} GB`);
 
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    if (b === 0) {
-        return "Error";
-    }
-    return a / b;
-}
-function calculator(num1, operator, num2) {
-    switch (operator) {
-        case '+':
-            return add(num1, num2);
-        case '-':
-            return sub(num1, num2);
-        case '*':
-            return multiply(num1, num2);
-        case '/':
-            return divide(num1, num2);
-        default:
-            return "Invalid operator";
-    }
-}
-console.log(calculator(10, '+', 5));
+console.log('\n--- USER & PATHS ---');
+console.log(`Hostname:      ${os.hostname()}`);
+console.log(`Username:      ${os.userInfo().username}`);
+console.log(`Home Dir:      ${os.homedir()}`);
+console.log(`Temp Dir:      ${os.tmpdir()}`);

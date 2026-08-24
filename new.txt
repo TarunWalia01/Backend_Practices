@@ -1,2 +1,0 @@
-Demo of transfer file.
-i am reading and transfering a data to the another file.

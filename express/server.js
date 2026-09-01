@@ -23,7 +23,13 @@ app.get('/students/' /*endpoint*/ , (req, res) => {
     res.json(students)
 })
 
-
+app.get('/search', (req, res) => {
+    const name = req.query.name
+    const age = req.query.age
+    
+    const stud=students.filter(s=>s.name.toLowerCase()===name.toLowerCase() && s.age===Number(age))
+    res.json(stud)
+})
 
 app.get('/students/:id', (req, res) => {
     // console.log(req.params.id)
@@ -53,13 +59,54 @@ app.post('/students', (req, res) => {
 app.delete('/students/:id', (req, res) => {
     const id = parseInt(req.params.id)
     const index=students.findIndex(student=>student.id===id)
-    if (index) {
-        index.splice(index, 1)
+    if (index!==-1) {
+        students.splice(index, 1)
         res.json({
             message: "Student deleted"
         })
+    } else {
+        res.status(404).json({ message: "Student not found" })
     }
 })
+
+
+//if you want to change all the details of student then use put method
+app.put('/students/:id', (req, res) => {
+    const id=parseInt(req.params.id)
+    const stud = students.find(student => student.id === id);
+    if (!stud) {
+        res.status(404).json({
+            message:"Student not found"
+        })
+    }
+    stud.name=req.body.name;
+    stud.age = req.body.age;
+    res.json({
+        message: "Student updated"
+    })
+})
+
+// if you wan to change the only particular detail of student then use patch method
+app.patch('/students/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+    const stud = students.find(student => student.id === id);
+    if (!stud) {
+        res.status(404).json({
+            message:"Student not found"
+        })
+    }
+    if (req.body.name !== undefined) {
+        stud.name = req.body.name;
+    }
+    if (req.body.age !== undefined) {
+        stud.age = req.body.age;
+    }
+    res.json({
+        message: "Student updated"
+    })
+    
+})
+
 
 app.listen(4000, () => {
     console.log("Server is listening.");

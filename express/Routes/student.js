@@ -1,5 +1,5 @@
 const checkRole = require('../Middleware/role_ware')
-
+const students= require('../Models/studentModel.js')
 const express = require('express'); // third party module
 const app = express(); // this statement will equivalent to http.createServer()
 const router = express.Router(); // this statement will equivalent to http.createServer()
@@ -11,24 +11,25 @@ router.use((req, res, next) => {
     console.log("Router Middleware Executed");       // for checking  requests and authentication
     next();
 })
-let students = [
-    {
-        id: 1,
-        name: "Tarun",
-        age: 20,
-    },
-    {
-        id: 2,
-        name: "Yatin",
-        age: 22,
-    },
-    {
-        id: 3,
-        name: "Vedansh",
-        age: 21,
-    },
-]
-router.get('/' , checkRole('admin', 'teacher', 'student'), (req, res) => {
+// let students = [
+//     {
+//         id: 1,
+//         name: "Tarun",
+//         age: 20,
+//     },
+//     {
+//         id: 2,
+//         name: "Yatin",
+//         age: 22,
+//     },
+//     {
+//         id: 3,
+//         name: "Vedansh",
+//         age: 21,
+//     },
+// ]
+router.get('/', checkRole('admin', 'teacher', 'student'), (req, res) => {
+    students=students.find()
     res.json(students)
 })
 

@@ -28,9 +28,15 @@ router.use((req, res, next) => {
 //         age: 21,
 //     },
 // ]
-router.get('/', checkRole('admin', 'teacher', 'student'), (req, res) => {
-    students=students.find()
-    res.json(students)
+router.get('/', checkRole('admin', 'teacher', 'student'), async (req, res) => {
+    try {
+        students = await students.find()
+        res.json(students)
+    }
+    catch (e) {
+        console.log(e)
+    }
+
 })
 
 router.get('/search',checkRole('admin', 'teacher', 'student'), (req, res) => {
@@ -41,10 +47,10 @@ router.get('/search',checkRole('admin', 'teacher', 'student'), (req, res) => {
     res.json(stud)
 })
 
-router.get('/:id',checkRole('admin', 'teacher', 'student'), (req, res) => {
+router.get('/:id',checkRole('admin', 'teacher', 'student'), async (req, res) => {
     // console.log(req.params.id)
     const id = parseInt(req.params.id)
-    const student=students.find(student =>student.id === id)
+    const student= await students.find(student =>student.id === id)
     if(!student){
         return res.status(404).json({
             message: "Student not found"

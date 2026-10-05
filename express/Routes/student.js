@@ -11,23 +11,6 @@ router.use((req, res, next) => {
     console.log("Router Middleware Executed");       // for checking  requests and authentication
     next();
 })
-// let students = [
-//     {
-//         id: 1,
-//         name: "Tarun",
-//         age: 20,
-//     },
-//     {
-//         id: 2,
-//         name: "Yatin",
-//         age: 22,
-//     },
-//     {
-//         id: 3,
-//         name: "Vedansh",
-//         age: 21,
-//     },
-// ]
 router.get('/', checkRole('admin', 'teacher', 'student'), async (req, res) => {
     try {
         students = await students.find()

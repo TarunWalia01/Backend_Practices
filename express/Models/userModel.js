@@ -1,5 +1,5 @@
 mongoose = require('mongoose')
-const users = mongoose.schema({
+const users = mongoose.Schema({
     name: {
         type:String,
         required:true
@@ -18,6 +18,10 @@ const users = mongoose.schema({
         type: String, 
         enum: ['teacher', 'student', 'admin'],
         default:'student'
+    },
+    refresh:{
+        type: String,
+        required:true
     }
 })
 

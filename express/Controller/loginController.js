@@ -36,6 +36,14 @@ const loginConroller = async (req, res) => {
           secure:process.env.SECURE_KEY
       })
     
+    const refToken = jwt.generateTokenRefresh(User)
+    const hashToken=bcrypt.hash(refToken,10)
+      res.save("refToken", hashToken, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 1000,
+        secure:process.env.SECURE_KEY_REFRESH
+      })
+    
       
       
       
@@ -47,9 +55,9 @@ const loginConroller = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       message: "Error occured",
     });
   }
 }
-modules.exports=loginConroller
+module.exports=loginConroller

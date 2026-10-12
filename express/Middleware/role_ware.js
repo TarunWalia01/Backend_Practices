@@ -2,7 +2,7 @@
 const checkRole = (...allowedRoles) => {
     return (req, res, next) => {
         const role= req.headers.role
-        if (!role) {
+        if (!req.user) {
             return res.status(401).json({
                 message: "Please Provide a Valid Role"
             })
@@ -11,7 +11,7 @@ const checkRole = (...allowedRoles) => {
             next();
         } else {
             return res.status(404).json({
-                message: ""
+                message: "Not allowed"
             })
         }
 

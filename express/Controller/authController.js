@@ -32,4 +32,4 @@ const regUser = async (req, res) => {
     });
   }
 }
-modules.exports=regUser
+module.exports=regUser
